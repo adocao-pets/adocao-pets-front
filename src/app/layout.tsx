@@ -1,8 +1,11 @@
+import './global.css'
+
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
 
-const inter = Inter({ subsets: ['latin'] })
+import { Noto_Sans as NotoSans } from 'next/font/google'
+
+const inter = NotoSans({ subsets: ['latin'], weight: ['400', '500', '700'] })
 
 export const metadata: Metadata = {
   title: 'Adoção de Pets',
