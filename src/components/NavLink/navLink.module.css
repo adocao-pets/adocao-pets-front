@@ -1,0 +1,45 @@
+/* components/NavLink.module.css */
+
+.navLink {
+    width: 220px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #F7FAFC;
+    padding: 12px;
+    border-radius: 8px;
+    gap: 12px;
+    margin-bottom: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .navLink:hover {
+    background-color: #F7FAFC;
+  }
+  
+  .icon {
+    width: 21.5px;
+    height: 21.5px; 
+    margin-right: 8px;
+  }
+
+  .navLink:hover, .selected {
+    background-color: #D1E6FF;
+  }
+  
+  .text {
+    width: 160px;
+    height: 20px;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #F7FAFC;
+    transition: color 0.3s ease;
+  }
+
+  .text:hover, .selectedText {
+    color: #1B85F3;
+  }
+  

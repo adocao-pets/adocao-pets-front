@@ -1,7 +1,12 @@
+import Menu from "@/components/Menu/menu"
+
 export default function HomePage() {
+  const mainStyle = {
+    height: '100%',
+  };
   return (
-    <main>
-      <h1>Logado</h1>
+    <main style={mainStyle}>
+      <Menu></Menu>
     </main>
   )
 }
