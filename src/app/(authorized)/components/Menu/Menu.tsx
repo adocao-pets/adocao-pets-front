@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { NavLink } from '../NavLink'
 import { FiPlusCircle } from 'react-icons/fi'
 import Link from 'next/link'
+import { User } from '../User'
 
 export const Menu: React.FC = () => {
   return (
@@ -12,7 +13,7 @@ export const Menu: React.FC = () => {
       <Link href="home">
         <Image src="/logo-branco.png" width={93} height={73} alt="Paw buddy" />
       </Link>
-      <main className="border-zinc-600 flex h-full flex-col border-t-2 pt-6">
+      <main className=" border-zinc-600 flex h-full min-w-[200px] flex-col border-t-2 pt-6">
         <ul className="flex flex-1 flex-col gap-3">
           <NavLink href="/search" icon={FiPlusCircle}>
             Procurar Pets
@@ -28,7 +29,7 @@ export const Menu: React.FC = () => {
           <NavLink icon={FiPlusCircle} href="">
             Cadastrar Pet
           </NavLink>
-          {/* <User /> */}
+          <User />
         </ul>
       </main>
     </aside>
