@@ -18,7 +18,6 @@ export const NavLink: React.FC<NavLinkProps> = ({
 }) => {
   const pathname = usePathname()
   const isSelected = pathname === href
-  console.log(isSelected)
 
   return (
     <Link href={href} passHref className={variants({ selected: isSelected })}>

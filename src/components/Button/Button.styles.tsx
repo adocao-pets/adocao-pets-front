@@ -1,7 +1,11 @@
 import { cva } from 'class-variance-authority'
 
-export const variants = cva(['rounded-xl', 'p-3', 'w-full', 'cursor-pointer'], {
+export const variants = cva(['rounded-xl', 'cursor-pointer'], {
   variants: {
+    full: {
+      true: ['w-full', 'p-3'],
+      false: ['py-3', 'px-10'],
+    },
     variant: {
       primary: [
         'focus:border-3',
@@ -15,5 +19,6 @@ export const variants = cva(['rounded-xl', 'p-3', 'w-full', 'cursor-pointer'], {
   },
   defaultVariants: {
     variant: 'primary',
+    full: true,
   },
 })
