@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <main className="self-center ">
       <Card.Root title="Adote um Pet 🐶">
-        <p className="text-lg text-gray-400">
+        <p className="text-gray-400 text-lg">
           Plataforma de adoção de Pets. <br />
           Está procurando um pet? Tem algum pet para colocar para adoção?
           <br />

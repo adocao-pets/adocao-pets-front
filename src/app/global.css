@@ -3,22 +3,22 @@
 @tailwind utilities;
 
 :root {  
-  --gray-rgb: 217, 217, 217;
-}
-
-html {
-  height: 100%;
-}
-
-body {
-  height: 100%;
-  margin: 0;
-  background-repeat: no-repeat;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(var(--gray-rgb))
-    
-  )
-  
-}
+   --gray-rgb: 217, 217, 217;
+ }
+ 
+ html {
+   height: 100%;
+ }
+ 
+ body {
+   height: 100%;
+   margin: 0;
+   background-repeat: no-repeat;
+   background: linear-gradient(
+     to bottom,
+     transparent,
+     rgba(var(--gray-rgb))
+     
+   )
+   
+ }
