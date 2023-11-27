@@ -26,7 +26,7 @@ export const Menu: React.FC = () => {
           <NavLink icon={FiPlusCircle} href="">
             Pets adotados
           </NavLink>
-          <NavLink icon={FiPlusCircle} href="">
+          <NavLink icon={FiPlusCircle} href="/pet-create">
             Cadastrar Pet
           </NavLink>
           <User />

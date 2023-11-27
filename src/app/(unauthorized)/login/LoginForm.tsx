@@ -1,9 +1,9 @@
 'use client'
 
 import { Button } from '@/components/Button'
-import { Input } from '@/components/Input'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
+import { Input } from '@/components/ui/input'
 
 interface LoginFields {
   email: string

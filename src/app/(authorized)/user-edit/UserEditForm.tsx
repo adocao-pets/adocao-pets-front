@@ -1,6 +1,6 @@
 'use client'
 import { Button } from '@/components/Button'
-import { Input } from '@/components/Input'
+import { Input } from '@/components/ui/input'
 import { useForm } from 'react-hook-form'
 interface UserFields {
   name: string
@@ -31,7 +31,7 @@ export const UserEditForm = () => {
         <Input
           label="CPF"
           id="documentNumber"
-          disabled
+          // disabled
           {...register('documentNumber')}
         />
         <Input label="CEP" id="zipCode" {...register('zipCode')} />
@@ -40,7 +40,7 @@ export const UserEditForm = () => {
           id="address"
           {...register('address')}
         />
-        <Input label="Email" id="email" disabled {...register('email')} />
+        <Input label="Email" id="email" {...register('email')} />
       </div>
       <footer className="shadow-all bottom-5 flex justify-end rounded-lg px-6 py-4">
         <Button full={false} type="submit">
