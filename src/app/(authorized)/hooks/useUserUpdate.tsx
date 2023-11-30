@@ -16,8 +16,6 @@ export const useUserUpdate = () => {
         email: user.email,
       },
     )
-    console.log(response)
-
     return response.data
   }
 
