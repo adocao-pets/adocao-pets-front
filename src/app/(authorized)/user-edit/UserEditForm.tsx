@@ -1,5 +1,5 @@
 'use client'
-import { Button } from '@/components/Button'
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useForm } from 'react-hook-form'
 interface UserFields {
@@ -42,10 +42,8 @@ export const UserEditForm = () => {
         />
         <Input label="Email" id="email" {...register('email')} />
       </div>
-      <footer className="shadow-all bottom-5 flex justify-end rounded-lg px-6 py-4">
-        <Button full={false} type="submit">
-          Confirmar Edição
-        </Button>
+      <footer className="bottom-5 flex justify-end rounded-lg px-6 py-4 shadow-all">
+        <Button type="submit">Confirmar Edição</Button>
       </footer>
     </form>
   )

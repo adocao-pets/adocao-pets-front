@@ -1,5 +1,5 @@
 'use client'
-import { Button } from '@/components/Button'
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
   Select,
@@ -61,9 +61,7 @@ export const CreatePetForm = () => {
         <Input label="Url da imagem" id="image" {...register('image')} />
       </div>
       <Footer>
-        <Button full={false} type="submit">
-          Cadastrar Pet
-        </Button>
+        <Button type="submit">Cadastrar Pet</Button>
       </Footer>
     </form>
   )

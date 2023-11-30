@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/components/Button'
+import { Button } from '@/components/ui/button'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/input'
@@ -31,7 +31,7 @@ export const LoginForm = () => {
       />
       <footer className="mt-5 flex flex-col gap-4">
         <Button type="submit">Realizar Login</Button>
-        <Button variant="plainGrey">
+        <Button variant="link">
           Não possui conta?&nbsp;
           <span className="text-blue-500">Clique aqui para se cadastrar</span>
         </Button>

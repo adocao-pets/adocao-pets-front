@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { Pet } from '@/entities/pet'
 import React from 'react'
 import { variants } from './CardPet.styles'
 interface CardPetProps {
@@ -16,6 +15,7 @@ export const CardPet: React.FC<CardPetProps> = ({
   imageUrl,
   selected,
 }) => {
+  console.log(selected)
   return (
     <div onClick={onClick} className={variants({ selected })}>
       <h2 className="text-center font-sans text-base font-semibold text-gray-800">

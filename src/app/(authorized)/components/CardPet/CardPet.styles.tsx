@@ -14,7 +14,6 @@ export const variants = cva(
     'overflow-hidden',
     'rounded-2xl',
     'border',
-    'border-gray-100',
     'bg-white',
     'px-4',
     'pb-0',
@@ -24,8 +23,8 @@ export const variants = cva(
   {
     variants: {
       selected: {
-        false: [],
-        true: ['border-blue-500'],
+        false: ['border-gray-100'],
+        true: ['border-blue-500', 'bg-blue-500/10'],
       },
     },
   },

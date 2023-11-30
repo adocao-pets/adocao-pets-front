@@ -36,6 +36,8 @@ export default function SearchPage() {
     setSelectePet(pet.id === selectedPet?.id ? null : pet)
   }
 
+  console.log(selectedPet)
+
   return (
     <>
       <Header title="Procurar Pets">
@@ -50,19 +52,17 @@ export default function SearchPage() {
           </div>
         </div>
       </Header>
-      <main className="px-8">
-        <div>
-          <div className="mt-10 grid grid-cols-4 gap-5">
-            {pets.map((pet) => (
-              <CardPet
-                key={pet.id}
-                imageUrl={pet.image}
-                name={pet.name}
-                onClick={() => handleSelectDog(pet)}
-                selected={selectedPet?.id === pet.id}
-              />
-            ))}
-          </div>
+      <main className="flex flex-1 flex-col px-8">
+        <div className="mt-10 grid flex-1 grid-cols-4 gap-5">
+          {pets.map((pet) => (
+            <CardPet
+              key={pet.id}
+              imageUrl={pet.image}
+              name={pet.name}
+              onClick={() => handleSelectDog(pet)}
+              selected={selectedPet?.id === pet.id}
+            />
+          ))}
         </div>
         <Footer>
           <ConfirmAdoptSheet pet={selectedPet} />

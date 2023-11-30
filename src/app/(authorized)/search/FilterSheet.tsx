@@ -23,7 +23,7 @@ import { PetType } from '../pet-create/CreatePetForm'
 export const FilterSheet = () => {
   return (
     <Sheet>
-      <SheetTrigger>
+      <SheetTrigger asChild>
         <Button variant="icon" size="icon">
           <ListFilter className="h-6 w-6" />
         </Button>
