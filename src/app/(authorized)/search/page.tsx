@@ -4,6 +4,14 @@ import { Input } from '@/components/ui/input'
 import { ListFilter } from 'lucide-react'
 import { CardPet } from '../components/CardPet'
 import { Footer } from '../components/Footer'
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet'
+import { FilterSheet } from './FilterSheet'
 
 export default function SearchPage() {
   return (
@@ -14,9 +22,8 @@ export default function SearchPage() {
             Realize a procura ou filtre ao lado
           </h3>
           <div className="flex">
-            <Button variant="icon" size="icon">
-              <ListFilter className="h-4 w-4" />
-            </Button>
+            <FilterSheet />
+
             <Input size={50} label="Procurar por nome" />
           </div>
         </div>
@@ -83,9 +90,19 @@ export default function SearchPage() {
           </div>
         </div>
         <Footer>
-          <Button size="lg" variant="default">
-            Adotar Pet
-          </Button>
+          <Sheet>
+            <SheetTrigger>
+              <Button size="lg" variant="default">
+                Adotar Pet
+              </Button>
+            </SheetTrigger>
+            <SheetContent>
+              <SheetHeader>
+                <SheetTitle>Filtrar por</SheetTitle>
+              </SheetHeader>
+              <div>Teste</div>
+            </SheetContent>
+          </Sheet>
         </Footer>
       </main>
     </>
