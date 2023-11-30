@@ -7,10 +7,10 @@ interface UnauthorizedLayoutProps {
   children: ReactNode
 }
 
-export default function UnauthorizedLayout({
+export default function AuthorizedLayout({
   children,
 }: UnauthorizedLayoutProps) {
-  useAuth(false)
+  useAuth(true)
 
   return (
     <div className="flex h-full bg-background">

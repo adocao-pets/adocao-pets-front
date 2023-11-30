@@ -1,3 +1,4 @@
+import { useAuth } from '@/hooks/useAuth'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ReactNode } from 'react'
@@ -9,6 +10,7 @@ interface UnauthorizedLayoutProps {
 export default function UnauthorizedLayout({
   children,
 }: UnauthorizedLayoutProps) {
+  useAuth(true)
   return (
     <div className="h-full grid-cols-2 overflow-auto bg-[url('/dog.png')] bg-[length:914px] bg-[50%_35%] bg-no-repeat lg:grid lg:bg-[-25%_25%] lg:p-12 ">
       <aside className="hidden lg:block">

@@ -7,6 +7,7 @@ import React from 'react'
 import { usePetsSearch } from '../hooks/usePetsSearch'
 import { PetsDetailsSheet } from '../components/PetsDetailsSheet/PetsDetailsSheet'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 export default function MyPetsAdoptPage() {
   const { pets } = usePetsSearch()
@@ -26,9 +27,11 @@ export default function MyPetsAdoptPage() {
                   <Button size="full" variant="destructive">
                     Excluir Pet
                   </Button>
-                  <Button size="full" variant="outline">
-                    Editar Pet
-                  </Button>
+                  <Link href={`/my-pets-adopt/${pet.id}`}>
+                    <Button size="full" variant="outline">
+                      Editar Pet
+                    </Button>
+                  </Link>
                 </div>
               }
             >

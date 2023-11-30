@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { useForm } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import { Login, useAuth } from '@/hooks/useAuth'
+import Link from 'next/link'
 
 export const LoginForm = () => {
   const { handleSubmit, register } = useForm<Login>()
@@ -18,12 +19,14 @@ export const LoginForm = () => {
         type="password"
         {...register('password')}
       />
-      <footer className="mt-5 flex flex-col gap-4">
+      <footer className="mt-5 flex flex-col gap-4 text-center">
         <Button type="submit">Realizar Login</Button>
-        <Button variant="link">
-          Não possui conta?&nbsp;
-          <span className="text-blue-500">Clique aqui para se cadastrar</span>
-        </Button>
+        <Link href="/register">
+          <Button variant="link">
+            Não possui conta?&nbsp;
+            <span className="text-blue-500">Clique aqui para se cadastrar</span>
+          </Button>
+        </Link>
       </footer>
     </form>
   )

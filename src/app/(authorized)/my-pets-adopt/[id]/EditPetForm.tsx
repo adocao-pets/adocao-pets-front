@@ -9,19 +9,32 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Controller, useForm } from 'react-hook-form'
-import { Footer } from '../components/Footer'
-import { usePetsCreate } from '../hooks/usePetsCreate'
+import { Footer } from '../../components/Footer'
 import { Pet, PetGender, PetSize, PetType } from '@/entities/pet'
 import { Textarea } from '@/components/ui/textarea'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
+import { usePetsEdit } from '../../hooks/usePetsEdit'
 
-// receber usuário por prop
-export const CreatePetForm = () => {
-  const { createPet } = usePetsCreate()
-  const { handleSubmit, register, control } = useForm<Pet>()
+interface IEditPetForm {
+  name: string
+  race?: string
+  gender?: PetGender
+  size?: PetSize
+  type?: PetType
+
+  image?: string
+  age?: number
+  description?: string
+}
+
+export const EditPetForm = () => {
+  const { id } = useParams<{ id: string }>()
   const router = useRouter()
-  const handleCreate = async (data: Pet) => {
-    createPet({
+
+  const { editPet, pet } = usePetsEdit(Number(id))
+
+  const handleEdit = async (data: IEditPetForm) => {
+    editPet({
       ...data,
       age: Number(data.age),
       userId: 1,
@@ -31,13 +44,27 @@ export const CreatePetForm = () => {
       })
       .catch(console.log)
   }
+  const { handleSubmit, register, control } = useForm<IEditPetForm>({
+    values: pet
+      ? {
+          age: pet.age,
+          description: pet.description,
+          gender: pet.gender as PetGender,
+          image: pet.image,
+          name: pet.name,
+          race: pet.race,
+          size: pet.size,
+          type: pet.type,
+        }
+      : undefined,
+  })
 
   return (
     <form
       className="relative flex w-full flex-1 flex-col gap-5 p-10 pb-0"
-      onSubmit={handleSubmit(handleCreate)}
+      onSubmit={handleSubmit(handleEdit)}
     >
-      <div className="flex flex-1 flex-col  gap-5">
+      <div className="flex flex-1 flex-col gap-5">
         <Input label="Nome" id="name" {...register('name')} />
         <Controller
           control={control}
@@ -107,7 +134,7 @@ export const CreatePetForm = () => {
         />
       </div>
       <Footer>
-        <Button type="submit">Cadastrar Pet</Button>
+        <Button type="submit">Editar Pet</Button>
       </Footer>
     </form>
   )

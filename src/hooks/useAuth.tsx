@@ -20,6 +20,17 @@ export const useAuth = (isAuthenticatedRoute: boolean) => {
     api
       .post('user/login', data)
       .then((response) => {
+        const user = response.data
+        localStorage.setItem('user', JSON.stringify(user))
+        router.replace('/home')
+      })
+      .catch(console.error)
+  }
+
+  const handleRegister = async (data: Login) => {
+    api
+      .post('user/create', data)
+      .then((response) => {
         const { user } = response.data
         localStorage.setItem('user', JSON.stringify(user))
         router.replace('/home')
@@ -37,5 +48,5 @@ export const useAuth = (isAuthenticatedRoute: boolean) => {
     }
   }, [router, isAuthenticatedRoute])
 
-  return { handleLogout, handleLogin }
+  return { handleLogout, handleLogin, handleRegister }
 }
