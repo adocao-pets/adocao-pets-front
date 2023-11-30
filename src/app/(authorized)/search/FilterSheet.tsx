@@ -19,10 +19,25 @@ import {
 } from '@/components/ui/sheet'
 import { ListFilter } from 'lucide-react'
 import { PetType } from '../pet-create/CreatePetForm'
+import { PetsFilters } from '../hooks/usePetsSearch'
+import { Controller, useForm } from 'react-hook-form'
+import { Pet } from '@/entities/pet'
+import { useState } from 'react'
 
-export const FilterSheet = () => {
+interface FilterSheetProps {
+  onPetsFilter: (filter: PetsFilters) => Promise<void>
+}
+
+export const FilterSheet = ({ onPetsFilter }: FilterSheetProps) => {
+  const { handleSubmit, control } = useForm<Pet>()
+  const [sheetOpen, setSheetOpen] = useState(false)
+  const handleFilter = async (data: Pet) => {
+    await onPetsFilter(data)
+    setSheetOpen(false)
+  }
+
   return (
-    <Sheet>
+    <Sheet open={sheetOpen} onOpenChange={(isOpen) => setSheetOpen(isOpen)}>
       <SheetTrigger asChild>
         <Button variant="icon" size="icon">
           <ListFilter className="h-6 w-6" />
@@ -32,46 +47,75 @@ export const FilterSheet = () => {
         <SheetHeader>
           <SheetTitle>Filtrar por</SheetTitle>
         </SheetHeader>
-        <div className="flex h-full flex-1 flex-col gap-10">
-          <Select>
-            <SelectTrigger label="Filtrar por raça">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value={PetType.CAT}>Gato</SelectItem>
-              <SelectItem value={PetType.DOG}>Cachorro</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger label="Filtrar por gênero">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="male">Macho</SelectItem>
-              <SelectItem value="female">Fêmea</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger label="Filtrar por porte do animal">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="small">Pequeno</SelectItem>
-              <SelectItem value="medium">Médio</SelectItem>
-              <SelectItem value="big">Grande</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        <SheetFooter>
-          <SheetClose>
-            <Button variant="outline" size="lg">
-              Cancelar
+        <form onSubmit={handleSubmit(handleFilter)}>
+          <div className="flex h-full flex-1 flex-col gap-10">
+            <Controller
+              control={control}
+              name="type"
+              render={({ field }) => (
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <SelectTrigger label="Filtrar por Tipo">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value={PetType.CAT}>Gato</SelectItem>
+                    <SelectItem value={PetType.DOG}>Cachorro</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            <Controller
+              control={control}
+              name="gender"
+              render={({ field }) => (
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <SelectTrigger label="Filtrar por gênero">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="male">Macho</SelectItem>
+                    <SelectItem value="female">Fêmea</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            <Controller
+              control={control}
+              name="size"
+              render={({ field }) => (
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <SelectTrigger label="Filtrar por porte do animal">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="small">Pequeno</SelectItem>
+                    <SelectItem value="medium">Médio</SelectItem>
+                    <SelectItem value="big">Grande</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+          </div>
+          <SheetFooter>
+            <SheetClose>
+              <Button variant="outline" size="lg">
+                Cancelar
+              </Button>
+            </SheetClose>
+            <Button variant="default" size="lg">
+              Filtrar
             </Button>
-          </SheetClose>
-          <Button variant="default" size="lg">
-            Filtrar
-          </Button>
-        </SheetFooter>
+          </SheetFooter>
+        </form>
       </SheetContent>
     </Sheet>
   )

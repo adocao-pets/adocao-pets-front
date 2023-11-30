@@ -1,7 +1,7 @@
 import { User } from './user'
 
 export interface Pet {
-  id: string
+  id: number
   image: string
   name: string
   gender: string

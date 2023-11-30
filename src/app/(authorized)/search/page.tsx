@@ -8,35 +8,37 @@ import { FilterSheet } from './FilterSheet'
 import { ConfirmAdoptSheet } from './ConfirmAdoptSheet'
 import React from 'react'
 import { Pet } from '@/entities/pet'
-import { v4 } from 'uuid'
-
-const pets: Pet[] = [
-  {
-    id: v4(),
-    age: 1,
-    description: 'any',
-    gender: 'Macho',
-    image: 'https://www.freeiconspng.com/thumbs/dog-png/dog-png-30.png',
-    name: 'Tom',
-    race: 'Golden',
-    size: 'Médio',
-    type: 'Cachorro',
-    fosterCare: {
-      id: 'any',
-      name: 'João',
-      email: 'joao@mail.com',
-    },
-  },
-]
+import { PetsFilters, usePetsSearch } from '../hooks/usePetsSearch'
+import { debounce } from '@/utils/debounce'
 
 export default function SearchPage() {
+  const { pets, fetchPets } = usePetsSearch()
   const [selectedPet, setSelectePet] = React.useState<Pet | null>(null)
 
   const handleSelectDog = (pet: Pet) => {
     setSelectePet(pet.id === selectedPet?.id ? null : pet)
   }
 
-  console.log(selectedPet)
+  const handleConfirmAdopt = () => {
+    console.log('confirm')
+  }
+
+  const [search, setSearch] = React.useState({} as PetsFilters)
+
+  const handleFilter = async (data: PetsFilters) => {
+    const newSearch = { ...search, ...data }
+    setSearch(newSearch)
+    await fetchPets(newSearch)
+  }
+
+  const debouncedInputRequest = React.useCallback(
+    debounce((name: string) => {
+      const newSearch = { ...search, name }
+      setSearch(newSearch)
+      fetchPets(newSearch)
+    }, 500),
+    [search, setSearch, fetchPets],
+  )
 
   return (
     <>
@@ -46,9 +48,13 @@ export default function SearchPage() {
             Realize a procura ou filtre ao lado
           </h3>
           <div className="flex">
-            <FilterSheet />
+            <FilterSheet onPetsFilter={handleFilter} />
 
-            <Input size={50} label="Procurar por nome" />
+            <Input
+              onChange={(e) => debouncedInputRequest(e.target.value)}
+              size={50}
+              label="Procurar por nome"
+            />
           </div>
         </div>
       </Header>
@@ -65,7 +71,7 @@ export default function SearchPage() {
           ))}
         </div>
         <Footer>
-          <ConfirmAdoptSheet pet={selectedPet} />
+          <ConfirmAdoptSheet onConfirm={handleConfirmAdopt} pet={selectedPet} />
         </Footer>
       </main>
     </>

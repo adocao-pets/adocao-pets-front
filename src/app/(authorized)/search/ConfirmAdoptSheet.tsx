@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetFooter,
   SheetHeader,
@@ -16,9 +17,13 @@ import { PetDetail } from './PetDetailt'
 
 interface ConfirmAdoptSheetProps {
   pet: Pet | null
+  onConfirm: () => void
 }
 
-export const ConfirmAdoptSheet = ({ pet }: ConfirmAdoptSheetProps) => {
+export const ConfirmAdoptSheet = ({
+  pet,
+  onConfirm,
+}: ConfirmAdoptSheetProps) => {
   return (
     <Sheet>
       <SheetTrigger disabled={!pet} asChild>
@@ -66,9 +71,11 @@ export const ConfirmAdoptSheet = ({ pet }: ConfirmAdoptSheetProps) => {
           </section>
         </div>
         <SheetFooter>
-          <Button size="lg" variant="default">
-            Confirmar adoção
-          </Button>
+          <SheetClose>
+            <Button onClick={onConfirm} size="lg" variant="default">
+              Confirmar adoção
+            </Button>
+          </SheetClose>
         </SheetFooter>
       </SheetContent>
     </Sheet>
