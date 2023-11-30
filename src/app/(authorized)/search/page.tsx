@@ -5,11 +5,13 @@ import { CardPet } from '../components/CardPet'
 import { Footer } from '../components/Footer'
 
 import { FilterSheet } from './FilterSheet'
-import { ConfirmAdoptSheet } from './ConfirmAdoptSheet'
 import React from 'react'
 import { Pet } from '@/entities/pet'
 import { PetsFilters, usePetsSearch } from '../hooks/usePetsSearch'
 import { debounce } from '@/utils/debounce'
+import { PetsDetailsSheet } from '../components/PetsDetailsSheet/PetsDetailsSheet'
+import { Button } from '@/components/ui/button'
+import { SheetClose } from '@/components/ui/sheet'
 
 export default function SearchPage() {
   const { pets, fetchPets } = usePetsSearch()
@@ -71,7 +73,25 @@ export default function SearchPage() {
           ))}
         </div>
         <Footer>
-          <ConfirmAdoptSheet onConfirm={handleConfirmAdopt} pet={selectedPet} />
+          <PetsDetailsSheet
+            title="Confirmar adoção?"
+            pet={selectedPet}
+            footer={
+              <SheetClose>
+                <Button
+                  onClick={handleConfirmAdopt}
+                  size="lg"
+                  variant="default"
+                >
+                  Confirmar adoção
+                </Button>
+              </SheetClose>
+            }
+          >
+            <Button size="lg" variant="default">
+              Adotar Pet
+            </Button>
+          </PetsDetailsSheet>
         </Footer>
       </main>
     </>

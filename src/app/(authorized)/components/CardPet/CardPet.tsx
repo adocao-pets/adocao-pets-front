@@ -4,8 +4,8 @@ import { variants } from './CardPet.styles'
 interface CardPetProps {
   name: string
   imageUrl: string
-  onClick: () => void
-  selected: boolean
+  onClick?: () => void
+  selected?: boolean
   // details: PetDetails
 }
 
@@ -15,7 +15,6 @@ export const CardPet: React.FC<CardPetProps> = ({
   imageUrl,
   selected,
 }) => {
-  console.log(selected)
   return (
     <div onClick={onClick} className={variants({ selected })}>
       <h2 className="text-center font-sans text-base font-semibold text-gray-800">

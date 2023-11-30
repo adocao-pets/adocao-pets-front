@@ -13,18 +13,15 @@ export const Menu: React.FC = () => {
       <Link href="home">
         <Image src="/logo-branco.png" width={93} height={73} alt="Paw buddy" />
       </Link>
-      <main className=" border-zinc-600 flex h-full min-w-[200px] flex-col border-t-2 pt-6">
+      <main className=" flex h-full min-w-[200px] flex-col border-t-2 border-zinc-600 pt-6">
         <ul className="flex flex-1 flex-col gap-3">
           <NavLink href="/search" icon={FiPlusCircle}>
             Procurar Pets
           </NavLink>
-          <NavLink icon={FiPlusCircle} href="">
-            Meus Pets
-          </NavLink>
         </ul>
         <ul className="flex  flex-col gap-3">
-          <NavLink icon={FiPlusCircle} href="">
-            Pets adotados
+          <NavLink icon={FiPlusCircle} href="/my-pets-adopt">
+            Pets para adoção
           </NavLink>
           <NavLink icon={FiPlusCircle} href="/pet-create">
             Cadastrar Pet

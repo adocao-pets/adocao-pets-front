@@ -1,3 +1,4 @@
+'use client'
 import api from '@/core/api/api'
 import { Pet } from '@/entities/pet'
 import { useEffect, useState } from 'react'
