@@ -12,6 +12,7 @@
  
  body {
    height: 100%;
+   overflow: hidden;
    margin: 0;
    background-repeat: no-repeat;
    background: linear-gradient(

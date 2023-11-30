@@ -11,7 +11,7 @@ export default function UnauthorizedLayout({
   return (
     <div className="flex h-full bg-background">
       <Menu />
-      <main className="bg-white flex w-full flex-col rounded-2xl p-8">
+      <main className="flex w-full flex-col overflow-auto rounded-2xl bg-white">
         {children}
       </main>
     </div>

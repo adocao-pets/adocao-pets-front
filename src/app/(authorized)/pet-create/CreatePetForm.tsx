@@ -9,6 +9,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Controller, useForm } from 'react-hook-form'
+import { Footer } from '../components/Footer'
 
 export enum PetType {
   CAT = 'GATO',
@@ -59,11 +60,11 @@ export const CreatePetForm = () => {
         <Input label="Idade" id="age" {...register('age')} />
         <Input label="Url da imagem" id="image" {...register('image')} />
       </div>
-      <footer className="shadow-all bottom-5 flex justify-end rounded-lg px-6 py-4">
+      <Footer>
         <Button full={false} type="submit">
           Cadastrar Pet
         </Button>
-      </footer>
+      </Footer>
     </form>
   )
 }
