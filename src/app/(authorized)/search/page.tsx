@@ -1,19 +1,41 @@
+'use client'
 import { Header } from '@/components/Header'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { ListFilter } from 'lucide-react'
 import { CardPet } from '../components/CardPet'
 import { Footer } from '../components/Footer'
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet'
+
 import { FilterSheet } from './FilterSheet'
+import { ConfirmAdoptSheet } from './ConfirmAdoptSheet'
+import React from 'react'
+import { Pet } from '@/entities/pet'
+import { v4 } from 'uuid'
+
+const pets: Pet[] = [
+  {
+    id: v4(),
+    age: 1,
+    description: 'any',
+    gender: 'Macho',
+    image: 'https://www.freeiconspng.com/thumbs/dog-png/dog-png-30.png',
+    name: 'Tom',
+    race: 'Golden',
+    size: 'Médio',
+    type: 'Cachorro',
+    fosterCare: {
+      id: 'any',
+      name: 'João',
+      email: 'joao@mail.com',
+    },
+  },
+]
 
 export default function SearchPage() {
+  const [selectedPet, setSelectePet] = React.useState<Pet | null>(null)
+
+  const handleSelectDog = (pet: Pet) => {
+    setSelectePet(pet.id === selectedPet?.id ? null : pet)
+  }
+
   return (
     <>
       <Header title="Procurar Pets">
@@ -31,78 +53,19 @@ export default function SearchPage() {
       <main className="px-8">
         <div>
           <div className="mt-10 grid grid-cols-4 gap-5">
-            <CardPet
-              name="Tom"
-              imageUrl="https://www.freeiconspng.com/thumbs/dog-png/dog-png-30.png"
-            />
-            <CardPet
-              name="Nala"
-              imageUrl="https://static.vecteezy.com/system/resources/thumbnails/016/761/881/small/the-dog-smiles-because-he-is-happy-png.png"
-            />
-            <CardPet
-              name="Tom"
-              imageUrl="https://cdn.pixabay.com/photo/2020/06/08/22/50/dog-5276317_1280.png"
-            />
-            <CardPet
-              name="Tom"
-              imageUrl="https://www.freeiconspng.com/thumbs/dog-png/dog-png-30.png"
-            />
-            <CardPet
-              name="Tom"
-              imageUrl="https://www.freeiconspng.com/thumbs/dog-png/dog-png-30.png"
-            />
-            <CardPet
-              name="Tom"
-              imageUrl="https://www.freeiconspng.com/thumbs/dog-png/dog-png-30.png"
-            />
-            <CardPet
-              name="Tom"
-              imageUrl="https://www.freeiconspng.com/thumbs/dog-png/dog-png-30.png"
-            />
-            <CardPet
-              name="Tom"
-              imageUrl="https://www.freeiconspng.com/thumbs/dog-png/dog-png-30.png"
-            />
-            <CardPet
-              name="Tom"
-              imageUrl="https://www.freeiconspng.com/thumbs/dog-png/dog-png-30.png"
-            />
-            <CardPet
-              name="Tom"
-              imageUrl="https://www.freeiconspng.com/thumbs/dog-png/dog-png-30.png"
-            />
-            <CardPet
-              name="Tom"
-              imageUrl="https://www.freeiconspng.com/thumbs/dog-png/dog-png-30.png"
-            />
-            <CardPet
-              name="Tom"
-              imageUrl="https://www.freeiconspng.com/thumbs/dog-png/dog-png-30.png"
-            />
-            <CardPet
-              name="Tom"
-              imageUrl="https://www.freeiconspng.com/thumbs/dog-png/dog-png-30.png"
-            />
-            <CardPet
-              name="Tom"
-              imageUrl="https://www.freeiconspng.com/thumbs/dog-png/dog-png-30.png"
-            />
+            {pets.map((pet) => (
+              <CardPet
+                key={pet.id}
+                imageUrl={pet.image}
+                name={pet.name}
+                onClick={() => handleSelectDog(pet)}
+                selected={selectedPet?.id === pet.id}
+              />
+            ))}
           </div>
         </div>
         <Footer>
-          <Sheet>
-            <SheetTrigger>
-              <Button size="lg" variant="default">
-                Adotar Pet
-              </Button>
-            </SheetTrigger>
-            <SheetContent>
-              <SheetHeader>
-                <SheetTitle>Filtrar por</SheetTitle>
-              </SheetHeader>
-              <div>Teste</div>
-            </SheetContent>
-          </Sheet>
+          <ConfirmAdoptSheet pet={selectedPet} />
         </Footer>
       </main>
     </>

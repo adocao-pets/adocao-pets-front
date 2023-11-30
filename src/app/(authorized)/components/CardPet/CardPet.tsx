@@ -1,14 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
+import { Pet } from '@/entities/pet'
 import React from 'react'
-
+import { variants } from './CardPet.styles'
 interface CardPetProps {
   name: string
   imageUrl: string
+  onClick: () => void
+  selected: boolean
+  // details: PetDetails
 }
 
-export const CardPet: React.FC<CardPetProps> = ({ name, imageUrl }) => {
+export const CardPet: React.FC<CardPetProps> = ({
+  name,
+  onClick,
+  imageUrl,
+  selected,
+}) => {
   return (
-    <div className="shadow-card -solid flex h-56 w-56 cursor-pointer flex-col items-center gap-4 overflow-hidden  rounded-2xl border border-gray-100 bg-white px-4 pb-0 pt-5 hover:bg-blue-500/10 active:border-blue-500">
+    <div onClick={onClick} className={variants({ selected })}>
       <h2 className="text-center font-sans text-base font-semibold text-gray-800">
         {name}
       </h2>

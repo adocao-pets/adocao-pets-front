@@ -43,12 +43,12 @@ export const FilterSheet = () => {
             </SelectContent>
           </Select>
           <Select>
-            <SelectTrigger label="Filtrar por sexo">
+            <SelectTrigger label="Filtrar por gênero">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="male">Macho</SelectItem>
-              <SelectItem value="femalte">Fêmea</SelectItem>
+              <SelectItem value="female">Fêmea</SelectItem>
             </SelectContent>
           </Select>
           <Select>
