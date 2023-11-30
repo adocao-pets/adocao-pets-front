@@ -15,7 +15,7 @@ export const Menu: React.FC = () => {
       </Link>
       <main className=" flex h-full min-w-[200px] flex-col border-t-2 border-zinc-600 pt-6">
         <ul className="flex flex-1 flex-col gap-3">
-          <NavLink href="/search" icon={FiPlusCircle}>
+          <NavLink href="/home" icon={FiPlusCircle}>
             Procurar Pets
           </NavLink>
         </ul>

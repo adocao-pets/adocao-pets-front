@@ -32,7 +32,11 @@ export default function MyPetsAdoptPage() {
                 </div>
               }
             >
-              <CardPet key={pet.id} imageUrl={pet.image} name={pet.name} />
+              {pet.image ? (
+                <CardPet key={pet.id} imageUrl={pet.image} name={pet.name} />
+              ) : (
+                <span>{pet.name}</span>
+              )}
             </PetsDetailsSheet>
           ))}
         </div>

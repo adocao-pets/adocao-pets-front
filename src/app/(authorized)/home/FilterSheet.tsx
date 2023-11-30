@@ -18,10 +18,9 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { ListFilter } from 'lucide-react'
-import { PetType } from '../pet-create/CreatePetForm'
 import { PetsFilters } from '../hooks/usePetsSearch'
 import { Controller, useForm } from 'react-hook-form'
-import { Pet } from '@/entities/pet'
+import { Pet, PetGender, PetSize, PetType } from '@/entities/pet'
 import { useState } from 'react'
 
 interface FilterSheetProps {
@@ -79,8 +78,8 @@ export const FilterSheet = ({ onPetsFilter }: FilterSheetProps) => {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="male">Macho</SelectItem>
-                    <SelectItem value="female">Fêmea</SelectItem>
+                    <SelectItem value={PetGender.MALE}>Macho</SelectItem>
+                    <SelectItem value={PetGender.FEMALE}>Fêmea</SelectItem>
                   </SelectContent>
                 </Select>
               )}
@@ -97,9 +96,9 @@ export const FilterSheet = ({ onPetsFilter }: FilterSheetProps) => {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="small">Pequeno</SelectItem>
-                    <SelectItem value="medium">Médio</SelectItem>
-                    <SelectItem value="big">Grande</SelectItem>
+                    <SelectItem value={PetSize.SMALL}>Pequeno</SelectItem>
+                    <SelectItem value={PetSize.MEDIUM}>Médio</SelectItem>
+                    <SelectItem value={PetSize.LARGE}>Grande</SelectItem>
                   </SelectContent>
                 </Select>
               )}

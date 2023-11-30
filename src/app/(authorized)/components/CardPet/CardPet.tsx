@@ -3,10 +3,9 @@ import React from 'react'
 import { variants } from './CardPet.styles'
 interface CardPetProps {
   name: string
-  imageUrl: string
+  imageUrl?: string
   onClick?: () => void
   selected?: boolean
-  // details: PetDetails
 }
 
 export const CardPet: React.FC<CardPetProps> = ({

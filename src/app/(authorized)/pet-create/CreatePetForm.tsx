@@ -10,34 +10,32 @@ import {
 } from '@/components/ui/select'
 import { Controller, useForm } from 'react-hook-form'
 import { Footer } from '../components/Footer'
+import { usePetsCreate } from '../hooks/usePetsCreate'
+import { Pet, PetGender, PetSize, PetType } from '@/entities/pet'
+import { Textarea } from '@/components/ui/textarea'
+import { useRouter } from 'next/navigation'
 
-export enum PetType {
-  CAT = 'GATO',
-  DOG = 'CACHORRO',
-}
-
-interface Pet {
-  image: string
-  name: string
-  age: string
-  type: PetType
-  race: string
-  description: string
-}
 // receber usuário por prop
 export const CreatePetForm = () => {
+  const { createPet } = usePetsCreate()
   const { handleSubmit, register, control } = useForm<Pet>()
-
-  const handleEdit = (data: Pet) => {
-    // TODO: Realizar conexão com a API
-
-    console.log(data)
+  const router = useRouter()
+  const handleCreate = async (data: Pet) => {
+    createPet({
+      ...data,
+      age: Number(data.age),
+      userId: 1,
+    })
+      .then(() => {
+        router.push('/my-pets-adopt')
+      })
+      .catch(console.log)
   }
 
   return (
     <form
       className="relative flex w-full flex-1 flex-col gap-5 p-10 pb-0"
-      onSubmit={handleSubmit(handleEdit)}
+      onSubmit={handleSubmit(handleCreate)}
     >
       <div className="flex flex-1 flex-col  gap-5">
         <Input label="Nome" id="name" {...register('name')} />
@@ -57,8 +55,44 @@ export const CreatePetForm = () => {
           )}
         />
         <Input label="Raça" id="race" {...register('race')} />
-        <Input label="Idade" id="age" {...register('age')} />
+        <Controller
+          control={control}
+          name="gender"
+          render={({ field }) => (
+            <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <SelectTrigger label="Gênero">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value={PetGender.MALE}>Macho</SelectItem>
+                <SelectItem value={PetGender.FEMALE}>Fêmea</SelectItem>
+              </SelectContent>
+            </Select>
+          )}
+        />
+        <Controller
+          control={control}
+          name="size"
+          render={({ field }) => (
+            <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <SelectTrigger label="Tamanho">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value={PetSize.SMALL}>Pequeno</SelectItem>
+                <SelectItem value={PetSize.MEDIUM}>Médio</SelectItem>
+                <SelectItem value={PetSize.LARGE}>Grande</SelectItem>
+              </SelectContent>
+            </Select>
+          )}
+        />
+        <Input type="number" label="Idade" id="age" {...register('age')} />
         <Input label="Url da imagem" id="image" {...register('image')} />
+        <Textarea
+          label="Descrição"
+          id="description"
+          {...register('description')}
+        />
       </div>
       <Footer>
         <Button type="submit">Cadastrar Pet</Button>
