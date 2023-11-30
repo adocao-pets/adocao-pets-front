@@ -14,10 +14,28 @@ export const LoginForm = () => {
   const { handleSubmit, register } = useForm<LoginFields>()
   const { replace } = useRouter()
 
-  const handleLogin = (data: LoginFields) => {
+  const handleLogin = async (data: LoginFields) => {
     // TODO: Realizar conexão com a API
+    try {
+      const response = await fetch('http://localhost:3001/api/v1/user/login', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      if (response.ok) {
+        const user = await response.json()
+        localStorage.setItem('user', JSON.stringify(user))
 
-    replace('/home')
+        replace('/home')
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (

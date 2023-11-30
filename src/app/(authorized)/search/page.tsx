@@ -6,9 +6,10 @@ import { Footer } from '../components/Footer'
 
 import { FilterSheet } from './FilterSheet'
 import { ConfirmAdoptSheet } from './ConfirmAdoptSheet'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Pet } from '@/entities/pet'
 import { v4 } from 'uuid'
+import { useRouter } from 'next/navigation'
 
 const pets: Pet[] = [
   {
@@ -30,7 +31,13 @@ const pets: Pet[] = [
 ]
 
 export default function SearchPage() {
+  const { replace } = useRouter()
   const [selectedPet, setSelectePet] = React.useState<Pet | null>(null)
+
+  useEffect(() => {
+    const user = localStorage.getItem('user')
+    if (!user) replace('/login')
+  }, [])
 
   const handleSelectDog = (pet: Pet) => {
     setSelectePet(pet.id === selectedPet?.id ? null : pet)
